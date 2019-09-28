@@ -3,7 +3,6 @@ package helper
 import (
 	"github.com/gin-gonic/gin"
 	"gopkg.in/go-playground/validator.v9"
-	"log"
 	"net/http"
 	"strings"
 )
@@ -38,6 +37,5 @@ func ValidatorMessage(c *gin.Context, err error) {
 		}
 		apiValidator.Errors = append(apiValidator.Errors, message)
 	}
-	c.JSON(http.StatusOK, apiValidator)
-	log.Printf("%v", apiValidator.Errors)
+	c.JSON(http.StatusBadRequest, apiValidator)
 }

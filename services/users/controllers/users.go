@@ -9,7 +9,6 @@ import (
 
 func CreateUser (c *gin.Context) {
 	var request models.User
-
 	if err := c.ShouldBindJSON(&request); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
@@ -20,7 +19,6 @@ func CreateUser (c *gin.Context) {
 		helper.ValidatorMessage(c, err)
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"message": "pong",
-	})
+
+	c.JSON(http.StatusCreated, &helper.APIMessage{Message: "User created successfully"})
 }
