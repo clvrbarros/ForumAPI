@@ -6,16 +6,21 @@ import (
 	"log"
 )
 
-var Database *sql.DB
+var db *sql.DB
 var err error
 
-func init() {
-	Database, err = sql.Open("postgres", "user=postgres dbname=forum password=admin host=127.0.0.1 sslmode=disable")
+func InitDb() error {
+	db, err = sql.Open("postgres", "user=postgres dbname=forum password=admin host=127.0.0.1 sslmode=disable")
 	if err != nil {
-		log.Panic(err)
+		return err
 	}
-	if err = Database.Ping(); err != nil {
-		log.Panic(err)
+	if err = db.Ping(); err != nil {
+		return err
 	}
 	log.Println("Database connected")
+	return nil
+}
+
+func CloseDb() {
+	db.Close()
 }
