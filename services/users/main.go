@@ -3,25 +3,19 @@ package main
 import (
 	"github.com/clvrbarros/ForumAPI/services/users/controllers"
 	"github.com/clvrbarros/ForumAPI/services/users/models"
-	"github.com/gin-gonic/gin"
+	"github.com/clvrbarros/ForumAPI/services/users/router"
 	"log"
 )
 
 func main() {
-	controllers.InitValidator()
-	err := models.InitDb()
+	controllers.InitValidator()    // Init validator instance
+	err := models.InitDb()		   // Init db instance
 	if err != nil {
 		log.Panic(err)
 	}
 	log.Println("PostgresSQL: Connection OK")
 	defer models.CloseDb()
 
-	r := gin.Default()
-
-	// Routes
-	r.POST("/register", controllers.CreateUser)
-	r.POST("/login", controllers.CreateUser)
-	r.POST("/register2", controllers.CreateUser)
-
+	r := router.NewRouter()			// Load routes
 	r.Run()
 }
