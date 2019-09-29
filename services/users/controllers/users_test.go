@@ -14,7 +14,7 @@ func TestCreateUser(t *testing.T) {
 	//	"firstname": "name",
 	//	"password": "123456",
 	//}
-	r := gin.Default()
+	r := gin.New()
 	req, _  := http.NewRequest("POST","/register", nil)
 
 	w := httptest.NewRecorder()
