@@ -15,7 +15,7 @@ type APIMessage struct {
 
 // APIValidator type is a struct for multiple error messages
 type APIValidator struct {
-	Errors []*APIMessage `json:"errors"`
+	Errors []APIMessage `json:"errors"`
 }
 
 func ValidatorMessage(c *gin.Context, err error) {
@@ -32,7 +32,7 @@ func ValidatorMessage(c *gin.Context, err error) {
 		case "min":
 			customError = "minimum length is " + err.Param()
 		}
-		message := &APIMessage{
+		message := APIMessage{
 			Message: "The " + strings.ToLower(err.Field()) + " field " + customError,
 		}
 		apiValidator.Errors = append(apiValidator.Errors, message)
