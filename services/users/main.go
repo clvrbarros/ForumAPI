@@ -10,8 +10,6 @@ import (
 	"log"
 )
 
-var v *validator.Validate
-
 func main() {
 	databaseInstance := database("user=postgres dbname=forum " +
 		"password=admin host=127.0.0.1 sslmode=disable")
