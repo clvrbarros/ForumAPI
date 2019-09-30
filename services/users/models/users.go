@@ -18,9 +18,9 @@ type User struct {
 }
 
 // CreateUser creates a new user
-func CreateUser() error {
+func (c *Conn) CreateUser() error {
 	sqlStmt := "INSERT INTO test (name) values ('clevinho')"
-	_, err := db.Exec(sqlStmt)
+	_, err := c.db.Exec(sqlStmt)
 	if err != nil {
 		log.Println(err)
 		return err

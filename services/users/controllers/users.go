@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func CreateUser (c *gin.Context) {
+func (s *Setup) CreateUser (c *gin.Context) {
 	var request models.User
 	if err := c.ShouldBindJSON(&request); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -15,7 +15,7 @@ func CreateUser (c *gin.Context) {
 		})
 	}
 
-	if err := validate.Struct(request); err != nil {
+	if err := s.validator.Struct(request); err != nil {
 		helper.ValidatorMessage(c, err)
 		return
 	}
