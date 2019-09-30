@@ -5,13 +5,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func NewRouter() *gin.Engine {
+func NewRouter(c *controllers.Setup) *gin.Engine {
 	router := gin.Default()
 
 	// Routes
-	router.POST("/register", controllers.CreateUser)
-	router.POST("/login", controllers.CreateUser)
-	router.POST("/register2", controllers.CreateUser)
+	router.POST("/register", c.CreateUser)
+	router.POST("/login", c.CreateUser)
+	router.POST("/register2", c.CreateUser)
 
 	return router
 }
