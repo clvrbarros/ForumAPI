@@ -1,7 +1,7 @@
 package models
 
 import (
-	"log"
+	"github.com/clvrbarros/ForumAPI/services/users/helper"
 	"time"
 )
 
@@ -18,11 +18,13 @@ type User struct {
 }
 
 // CreateUser creates a new user
-func (c *Conn) CreateUser() error {
-	sqlStmt := "INSERT INTO test (name) values ('clevinho')"
-	_, err := c.db.Exec(sqlStmt)
+func (c *Conn) CreateUser(u *User) error {
+	hashPass, err := helper.HashPassword(u.Password, 10)
 	if err != nil {
-		log.Println(err)
+		return err
+	}
+	_, err = c.db.Exec(queryUserInsert, u.Email, hashPass, u.FirstName, u.LastName, u.Country)
+	if err != nil {
 		return err
 	}
 	return nil
