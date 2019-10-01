@@ -31,7 +31,7 @@ func database(connect string) *sql.DB {
 
 	err = db.Ping()
 	if err != nil {
-		log.Fatalln("Could not connect to MySQL: ", err)
+		log.Fatalln("Could not connect to Postgres: ", err)
 	}
 
 	log.Println("Database connected")
