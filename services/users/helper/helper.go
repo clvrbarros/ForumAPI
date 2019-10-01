@@ -5,6 +5,7 @@ import (
 	"gopkg.in/go-playground/validator.v9"
 	"net/http"
 	"strings"
+	"golang.org/x/crypto/bcrypt"
 )
 
 // APIMessage type is a struct for generic JSON response
@@ -18,6 +19,16 @@ type APIValidator struct {
 	Errors []APIMessage `json:"errors"`
 }
 
+func HashPassword(password string, cost int) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), cost)
+	if err != nil {
+		return "", err
+	}
+
+	return string(bytes), nil
+}
+
+// ValidatorMessage validate error messages
 func ValidatorMessage(c *gin.Context, err error) {
 	apiValidator := &APIValidator{}
 
