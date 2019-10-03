@@ -19,6 +19,7 @@ type APIValidator struct {
 	Errors []APIMessage `json:"errors"`
 }
 
+// HashPassword encrypts a given password using bcrypt algorithm
 func HashPassword(password string, cost int) (string, error) {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), cost)
 	if err != nil {
@@ -26,6 +27,12 @@ func HashPassword(password string, cost int) (string, error) {
 	}
 
 	return string(bytes), nil
+}
+
+// CheckPasswordHash checks if the given password matches
+func CheckPasswordHash(password, hash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	return err == nil
 }
 
 // ValidatorMessage validate error messages
