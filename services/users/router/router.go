@@ -10,8 +10,7 @@ func NewRouter(c *controllers.Setup) *gin.Engine {
 
 	// Routes
 	router.POST("/register", c.CreateUser)
-	router.POST("/login", c.CreateUser)
-	router.POST("/register2", c.CreateUser)
+	router.POST("/login", c.AuthUser)
 
 	return router
 }
