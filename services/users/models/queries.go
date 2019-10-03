@@ -14,3 +14,8 @@ const (
 		VALUES($1, $2, $3, $4, $5, false)
 	`
 )
+
+// Auth queires
+const (
+	queryAuthPassword = "SELECT password FROM users WHERE email=$1"
+)
